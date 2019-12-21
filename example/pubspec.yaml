@@ -1,0 +1,14 @@
+name: flex_example
+description: A example for the flex package.
+# version: 1.0.0
+author: Michael Pfaff <michael@pfaff.dev>
+
+environment:
+  sdk: '>=2.6.0 <3.0.0'
+
+dependencies:
+  flex:
+    path: ../
+
+dev_dependencies:
+  test: ^1.9.4

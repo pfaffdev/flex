@@ -1,0 +1,138 @@
+# Load defaults just in case
+default: true
+
+# Heading levels should only increase by 1 at a time.
+md001: true
+
+# Heading style
+md003:
+  style: atx
+
+# Unordered list style
+md004:
+  style: sublist
+
+# Raise error on inconsistent list indent
+md005: true
+
+# Start unordered lists at the beginning of the line
+md006: true
+
+# Unordered list indent
+md007:
+  indent: 2
+
+# Raise error on trailing spaces
+md009:
+  # Max number of spaces to allow for hard line breaks
+  br_spaces: 2
+  # Allow empty lines in lists
+  list_item_empty_lines: true
+
+# Raise error on hard tabs
+md010: false
+
+# Warn when text is found that appears to be a reversed link
+md011: true
+
+# Raise error on multiple consecutive blank lines
+md012: false
+
+# Max line length (false to disable)
+md013: false
+
+# Error when `$` for command line in code block is used without showing command output
+md014: false
+
+# Raise error if a space is missing after ATX header symbol.
+md018: true
+
+# Raise error if more than one space is used after ATX header symbol.
+md019: true
+
+# Headers should be surrounded by blank lines.
+md022: true
+
+# Headings must start at the beginning of the line.
+md023: true
+
+# Warn when multiple headers have the same content
+md024: false
+
+# Warn when multiple top level headers are in use.
+md025: true
+
+# Warm when trailing punctuation is used in a heading
+md026: true
+
+# Warn when multiple spaces are used after a blockquote symbol
+md027: true
+
+# Warn when blank lines are included in blockquotes (blank line *without* blockquote symbol)
+md028: true
+
+# Warn when an ordered list does not use an increasing pattern
+md029: true
+
+# Warn when more or less than one space is used after any list symbol
+md030: true
+
+# Fenced code blocks should be surrounded by blank lines
+md031: true
+
+# Lists should be surrounded by blank lines
+md032: true
+
+# Warn when inline HTML is used
+md033: false
+
+# Warn when a bare url is used as they aren't converted to links by many parsers
+md034: true
+
+# Horizontal rule style
+md035:
+  style: '- - -'
+
+# Emphasis used instead of a heading
+md036: false
+
+# Warns when spaces are used directly inside emphasis symbols
+md037: true
+
+# Warns when spaces are used directly inside inline code symbols
+md038: true
+
+# Warns when space are used directly inside link symbols
+md039: true
+
+# Warns when a language is not specified in fenced code blocks
+md040: true
+
+# The first line in a file is not a top level heading
+md041: true
+
+# No empty links
+md042: true
+
+# Only allow heading structure passed here
+md043: false
+
+# For the phrases in `names` only allow the specified capitalization.
+md044:
+  names:
+    - Westmount
+    - Flex Day
+    - Dart
+    - Flutter
+    - Google
+  code_blocks: false
+
+# Images must have alt text
+md045: true
+
+# Code blocks must be fenced
+md046:
+  style: fenced
+
+# Files must end with a single newline character
+md047: true
