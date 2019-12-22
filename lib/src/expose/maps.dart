@@ -1,9 +1,7 @@
 /// The code in this file is derived from the Dart SDK [here](https://github.com/dart-lang/sdk/blob/master/sdk/lib/collection/maps.dart) written by the Dart project authors.
 
+import 'package:flex/flex.dart';
 import 'package:meta/meta.dart';
-
-/// Template for `ifAbsent` parameter of [Map.putIfAbsent].
-typedef V IfAbsentHandler<V>();
 
 /// Wrapper around a class that implements [Map] that only exposes `Map`
 /// members.
@@ -42,7 +40,7 @@ class MapView<K, V> implements Map<K, V> {
   }
 
   @override
-  V putIfAbsent(K key, V ifAbsent()) => internalMap.putIfAbsent(key, ifAbsent);
+  V putIfAbsent(K key, Callback<V> ifAbsent) => internalMap.putIfAbsent(key, ifAbsent);
 
   @override
   bool containsKey(Object key) => internalMap.containsKey(key);
@@ -51,7 +49,7 @@ class MapView<K, V> implements Map<K, V> {
   bool containsValue(Object value) => internalMap.containsValue(value);
 
   @override
-  void forEach(void action(K key, V value)) {
+  void forEach(Value2Callback<K, V, void> action) {
     internalMap.forEach(action);
   }
 
@@ -85,18 +83,18 @@ class MapView<K, V> implements Map<K, V> {
   }
 
   @override
-  Map<K2, V2> map<K2, V2>(MapEntry<K2, V2> transform(K key, V value)) => internalMap.map<K2, V2>(transform);
+  Map<K2, V2> map<K2, V2>(Value2Callback<K, V, MapEntry<K2, V2>> transform) => internalMap.map<K2, V2>(transform);
 
   @override
-  V update(K key, V update(V value), {IfAbsentHandler<V> ifAbsent}) => internalMap.update(key, update, ifAbsent: ifAbsent);
+  V update(K key, Value1Callback<V, V> update, {Callback<V> ifAbsent}) => internalMap.update(key, update, ifAbsent: ifAbsent);
 
   @override
-  void updateAll(V update(K key, V value)) {
+  void updateAll(Value2Callback<K, V, V> update) {
     internalMap.updateAll(update);
   }
 
   @override
-  void removeWhere(bool test(K key, V value)) {
+  void removeWhere(Value2Callback<K, V, bool> test) {
     internalMap.removeWhere(test);
   }
 }
@@ -138,25 +136,25 @@ mixin UnmodifiableMapMixin<K, V> on Map<K, V> {
 
   /// This operation is not supported by an unmodifiable map.
   @override
-  void removeWhere(bool test(K key, V value)) {
+  void removeWhere(Value2Callback<K, V, bool> test) {
     throw UnsupportedError('Cannot modify unmodifiable map');
   }
 
   /// This operation is not supported by an unmodifiable map.
   @override
-  V putIfAbsent(K key, V ifAbsent()) {
+  V putIfAbsent(K key, Callback<V> ifAbsent) {
     throw UnsupportedError('Cannot modify unmodifiable map');
   }
 
   /// This operation is not supported by an unmodifiable map.
   @override
-  V update(K key, V update(V value), {IfAbsentHandler<V> ifAbsent}) {
+  V update(K key, Value1Callback<V, V> update, {Callback<V> ifAbsent}) {
     throw UnsupportedError('Cannot modify unmodifiable map');
   }
 
   /// This operation is not supported by an unmodifiable map.
   @override
-  void updateAll(V update(K key, V value)) {
+  void updateAll(Value2Callback<K, V, V> update) {
     throw UnsupportedError('Cannot modify unmodifiable map');
   }
 }

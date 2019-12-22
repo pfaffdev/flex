@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flex/flex.dart';
 import 'package:intl/intl.dart';
 
 /// A DateFormat implementing ISO 8601 without timezone
@@ -20,3 +21,8 @@ class Nullable {
 
 /// Used to indicate that a field or parameter this annotates is able to store a null value (prior to NNBD)
 const Nullable nullable = Nullable._();
+
+/// Prints an encoded Plexus event. If Plexus is installed, this will be handled by the Plexus root module.
+void sendEncodedEvent(String level, String message, [dynamic blob]) {
+  print('$encodedEventHeader$encodedEventSeparator${DateTime.now()}$encodedEventSeparator$level$encodedEventSeparator$message$encodedEventSeparator$blob');
+}

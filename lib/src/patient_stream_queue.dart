@@ -57,18 +57,18 @@ class PatientStreamQueue<E> extends Subject<E> {
 
   /// Disposes of the entire [PatientStreamQueue]
   Future<void> dispose({bool wait = true}) async {
-    if (state == State.initialized || state == State.uninitialized) {
-      _state = State.deinitializing;
-      if (wait) {
+    _state = State.deinitializing;
+    if (wait) {
+      if (state == State.initialized || state == State.uninitialized) {
         while (_queue.isNotEmpty) {
           // await Future.delayed(const Duration(milliseconds: 1));
         }
+      } else {
+        sendEncodedEvent('Level.WARNING', 'PatientStreamQueue not initialized or uninitialized. State is $state. Not waiting for disposal.', state);
       }
-      await internalController.close();
-      _state = State.deinitialized;
-    } else {
-      print('[WARNING]: PatientStreamQueue not initialized. State is $state. Not disposing.');
     }
+    await internalController.close();
+    _state = State.deinitialized;
   }
 
   void _onListen() {
@@ -86,7 +86,7 @@ class PatientStreamQueue<E> extends Subject<E> {
 
       _state = State.initialized;
     } else {
-      print('[WARNING]: PatientStreamQueue not uninitialized. State is $state. Not initializing.');
+      sendEncodedEvent('Level.WARNING', 'PatientStreamQueue not uninitialized. State is $state. Not initializing.', state);
     }
   }
 
@@ -96,7 +96,7 @@ class PatientStreamQueue<E> extends Subject<E> {
 
       _state = State.deinitialized;
     } else {
-      print('[WARNING]: PatientStreamQueue not initialized. State is $state. Not deinitializing.');
+      sendEncodedEvent('Level.WARNING', 'PatientStreamQueue not initialized. State is $state. Not deinitializing.', state);
     }
   }
 }

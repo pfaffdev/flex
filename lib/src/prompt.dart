@@ -27,7 +27,7 @@ String promptFor({@required String prompt, String promptSuffix = ' >>> ', bool e
 ///
 /// [parse] must n
 T promptSync<T>(String question, {T fallback, String hint, T Function(String) parse, bool echo = true, bool debug = false}) {
-  assert(T is String || parse != null, '`parse` can only be null if T is String. T is $T');
+  assert(T == String || parse != null, '`parse` can only be null if T is String. T is $T');
 
   stdin.echoMode = echo;
 
@@ -75,7 +75,7 @@ final Stream<String> stdinLined = stdinUtf8.transform(const LineSplitter());
 ///
 /// [parse] must n
 Future<T> prompt<T>(String question, {T fallback, T def, String hint, T Function(String) parse, bool echo = true, bool debug = false}) async {
-  assert(T is String || parse != null, '`parse` can only be null if T is String. T is $T');
+  assert(T == String || parse != null, '`parse` can only be null if T is String. T is $T');
 
   stdin.echoMode = echo;
 

@@ -1,5 +1,3 @@
-import 'package:flex/flex.dart';
-
 /// Provides extension functions for [String]
 extension ExtString on String {
   /// Returns `this` with keys swapped out for values found in [substitutions].

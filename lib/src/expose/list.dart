@@ -3,6 +3,7 @@
 import 'dart:collection' show ListMixin;
 import 'dart:math';
 
+import 'package:flex/flex.dart';
 import 'package:meta/meta.dart';
 
 /// Mixin for an unmodifiable [List] class.
@@ -71,13 +72,13 @@ mixin UnmodifiableListMixin<E> on List<E> {
 
   /// This operation is not supported by an unmodifiable list.
   @override
-  void removeWhere(bool test(E element)) {
+  void removeWhere(Value1Callback<E, bool> test) {
     throw UnsupportedError('Cannot remove from an unmodifiable list');
   }
 
   /// This operation is not supported by an unmodifiable list.
   @override
-  void retainWhere(bool test(E element)) {
+  void retainWhere(Value1Callback<E, bool> test) {
     throw UnsupportedError('Cannot remove from an unmodifiable list');
   }
 
