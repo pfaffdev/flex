@@ -57,14 +57,15 @@ class PatientStreamQueue<E> extends Subject<E> {
 
   /// Disposes of the entire [PatientStreamQueue]
   Future<void> dispose({bool wait = true}) async {
+    final was = _state;
     _state = State.deinitializing;
     if (wait) {
-      if (state == State.initialized || state == State.uninitialized) {
+      if (was == State.initialized || was == State.uninitialized) {
         while (_queue.isNotEmpty) {
           // await Future.delayed(const Duration(milliseconds: 1));
         }
       } else {
-        sendEncodedEvent('Level.WARNING', 'PatientStreamQueue not initialized or uninitialized. State is $state. Not waiting for disposal.', state);
+        sendEncodedEvent('Level.WARNING', 'PatientStreamQueue not initialized or uninitialized. State is $was. Not waiting for disposal.', state);
       }
     }
     await internalController.close();

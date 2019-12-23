@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.2
+
+- Fix logic in `PatientStreamQueue.dispose`
+
+
 ## 0.2.1
 
 - Add `sendEncodedEvent()` for sending Plexus encoded events
