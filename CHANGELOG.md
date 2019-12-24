@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 - Vastly improve `PatientStreamQueue`
+
+- Fix logic in `PatientStreamQueue._onCancel`
+- Split `PatientStreamQueue.dispose` into `PatientStreamQueue.close` returning a `Future<void>`, which disposes of the `PatientStreamQueue` waiting for events to be processed depending on the value of named parameter `wait`, and `PatientStreamQueue.dispose` returning a `void`, which disposes of the `PatientStreamQueue` without waiting for events to be processed
+- Wrap `stdin.echoMode` calls in `prompt` and `promptSync` in try/catch to support platforms that don't support setting echo mode (ex. Dart-Code terminal output mode)
+- Split example into 3 files
+- Add example launch configuration
+
 ## 0.2.2
 
 - Fix logic in `PatientStreamQueue.dispose`

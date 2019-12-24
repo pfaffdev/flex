@@ -1,0 +1,22 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Patient Stream Queue Waiting Example",
+            "program": "example/bin/patient_stream_queue_waiting.dart",
+            "request": "launch",
+            "type": "dart",
+            "console": "terminal"
+        },
+        {
+            "name": "Patient Stream Queue Non-Waiting Example",
+            "program": "example/bin/patient_stream_queue_nonwaiting.dart",
+            "request": "launch",
+            "type": "dart",
+            "console": "terminal"
+        }
+    ]
+}

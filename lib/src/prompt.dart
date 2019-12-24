@@ -29,7 +29,9 @@ String promptFor({@required String prompt, String promptSuffix = ' >>> ', bool e
 T promptSync<T>(String question, {T fallback, String hint, T Function(String) parse, bool echo = true, bool debug = false}) {
   assert(T == String || parse != null, '`parse` can only be null if T is String. T is $T');
 
-  stdin.echoMode = echo;
+  try {
+    stdin.echoMode = echo;
+  } on StdinException {}
 
   stdout.write('$question${hint != null || fallback != null ? ' (${hint ?? fallback})' : ''} >>> ');
 
@@ -52,7 +54,9 @@ T promptSync<T>(String question, {T fallback, String hint, T Function(String) pa
   // Print newline if echo is disabled.
   if (!echo) stdout.writeln();
 
-  stdin.echoMode = true;
+  try {
+    stdin.echoMode = true;
+  } on StdinException {}
 
   return ret as T;
 }
@@ -77,7 +81,9 @@ final Stream<String> stdinLined = stdinUtf8.transform(const LineSplitter());
 Future<T> prompt<T>(String question, {T fallback, T def, String hint, T Function(String) parse, bool echo = true, bool debug = false}) async {
   assert(T == String || parse != null, '`parse` can only be null if T is String. T is $T');
 
-  stdin.echoMode = echo;
+  try {
+    stdin.echoMode = echo;
+  } on StdinException {}
 
   stdout.write('$question${hint != null || def != null ? ' (${hint ?? def})' : ''} >>> ');
 
@@ -100,7 +106,9 @@ Future<T> prompt<T>(String question, {T fallback, T def, String hint, T Function
   // Print newline if echo is disabled.
   if (!echo) stdout.writeln();
 
-  stdin.echoMode = true;
+  try {
+    stdin.echoMode = true;
+  } on StdinException {}
 
   return ret as T;
 }

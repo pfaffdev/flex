@@ -55,24 +55,51 @@ class PatientStreamQueue<E> extends Subject<E> {
     if (state != State.initialized) _queue.add(Tuple2(error, stackTrace));
   }
 
-  /// Disposes of the entire [PatientStreamQueue]
-  Future<void> dispose({bool wait = true}) async {
-    final was = _state;
-    _state = State.deinitializing;
-    if (wait) {
-      if (was == State.initialized || was == State.uninitialized) {
-        while (_queue.isNotEmpty) {
-          // await Future.delayed(const Duration(milliseconds: 1));
-        }
-      } else {
-        sendEncodedEvent('Level.WARNING', 'PatientStreamQueue not initialized or uninitialized. State is $was. Not waiting for disposal.', state);
+  /// Disposes of the [PatientStreamQueue] and `internalController`, waiting for any events to fire.
+  @override
+  Future<void> close({bool wait = true}) async {
+    if (wait && _state == State.initialized) {
+      // final was = _state;
+      _state = State.deinitializing;
+    
+      await _listened;
+      // if (was == State.initialized || was == State.uninitialized) {
+      //   while (_queue.isNotEmpty) {
+      //     // await Future.delayed(const Duration(milliseconds: 1));
+      //   }
+      // } else {
+      //   sendEncodedEvent('Level.WARNING', 'PatientStreamQueue not initialized or uninitialized. State is $was. Not waiting for disposal.', state);
+      // }
+
+      _state = State.deinitializing;
+
+      await internalController.close();
+
+      _state = State.deinitialized;
+    } else {
+      if (wait) {
+        sendEncodedEvent('Level.WARNING', 'PatientStreamQueue not initialized. State is $_state. Not waiting for disposal.', _state);
       }
+
+      dispose();
     }
-    await internalController.close();
+  }
+
+  /// Disposes of the [PatientStreamQueue] and `internalController`.
+  void dispose() {
+    _state = State.deinitializing;
+
+    internalController.close().catchError(([_, __]) {});
+
     _state = State.deinitialized;
   }
 
-  void _onListen() {
+  Future<void> _listened;
+
+  Future<void> _onListen() async {
+    final completer = Completer<void>();
+    _listened = completer.future;
+
     if (state == State.uninitialized || state == State.deinitialized) {
       _state = State.initializing;
 
@@ -89,14 +116,16 @@ class PatientStreamQueue<E> extends Subject<E> {
     } else {
       sendEncodedEvent('Level.WARNING', 'PatientStreamQueue not uninitialized. State is $state. Not initializing.', state);
     }
+
+    completer.complete();
   }
 
-  void _onCancel() {
+  Future<void> _onCancel() async {
     if (state == State.initialized) {
       _state = State.deinitializing;
 
       _state = State.deinitialized;
-    } else {
+    } else if (state != State.deinitializing && state != State.deinitialized) {
       sendEncodedEvent('Level.WARNING', 'PatientStreamQueue not initialized. State is $state. Not deinitializing.', state);
     }
   }
