@@ -4,6 +4,7 @@ library flex;
 export 'package:flex/src/constants.dart';
 export 'package:flex/src/extension/iterable.dart';
 export 'package:flex/src/extension/string.dart';
+export 'package:flex/src/lang.dart';
 export 'package:flex/src/operator_wrapper.dart';
 export 'package:flex/src/patient_stream_queue.dart';
 export 'package:flex/src/prompt.dart';

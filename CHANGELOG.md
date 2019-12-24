@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0 - Add Plexus Localizations
+
+- Add localization implementation from Plexus
+
+
 ## 0.3.0+2
 
 - Add comment explaining try/on block to bypass useless lint
