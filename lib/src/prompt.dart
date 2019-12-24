@@ -31,7 +31,9 @@ T promptSync<T>(String question, {T fallback, String hint, T Function(String) pa
 
   try {
     stdin.echoMode = echo;
-  } on StdinException {}
+  } on StdinException {
+    //stdin echo mode is not supported
+  }
 
   stdout.write('$question${hint != null || fallback != null ? ' (${hint ?? fallback})' : ''} >>> ');
 
@@ -56,7 +58,9 @@ T promptSync<T>(String question, {T fallback, String hint, T Function(String) pa
 
   try {
     stdin.echoMode = true;
-  } on StdinException {}
+  } on StdinException {
+    //stdin echo mode is not supported
+  }
 
   return ret as T;
 }
@@ -83,7 +87,9 @@ Future<T> prompt<T>(String question, {T fallback, T def, String hint, T Function
 
   try {
     stdin.echoMode = echo;
-  } on StdinException {}
+  } on StdinException {
+    //stdin echo mode is not supported
+  }
 
   stdout.write('$question${hint != null || def != null ? ' (${hint ?? def})' : ''} >>> ');
 
@@ -108,7 +114,9 @@ Future<T> prompt<T>(String question, {T fallback, T def, String hint, T Function
 
   try {
     stdin.echoMode = true;
-  } on StdinException {}
+  } on StdinException {
+    //stdin echo mode is not supported
+  }
 
   return ret as T;
 }

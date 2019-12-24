@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0+2
+
+- Add comment explaining try/on block to bypass useless lint
+
+
 ## 0.3.0 - Vastly improve `PatientStreamQueue`
 
 - Fix logic in `PatientStreamQueue._onCancel`
@@ -7,6 +12,7 @@
 - Wrap `stdin.echoMode` calls in `prompt` and `promptSync` in try/catch to support platforms that don't support setting echo mode (ex. Dart-Code terminal output mode)
 - Split example into 3 files
 - Add example launch configuration
+
 
 ## 0.2.2
 
