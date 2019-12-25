@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1
+
+- Change `String.fillTemplate` regex to support escaping `$` with a `\`
+
+
 ## 0.4.0 - Add Plexus Localizations
 
 - Add localization implementation from Plexus
