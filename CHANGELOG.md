@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 - ISO Localization
+
+- Add all ISO language codes
+- Add all ISO country codes
+- Add all ISO locale codes
+- Fix bug in string template regex not allowing variable at the beginning of a string
+
+
 ## 0.4.1
 
 - Change `String.fillTemplate` regex to support escaping `$` with a `\`
