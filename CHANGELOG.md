@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.1
+
+- Fix bug in string template logic not detecting `\` properly
+- Fix bug in string template logic adding variable to beginning of substitution instead of the character immediately before, if present
+- Fix bug in string template logic caused by match group 1 being null if the variable is at the beginning of the string
+
+
 ## 0.5.0 - ISO Localization
 
 - Add all ISO language codes
